@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36d6bb17-6734-4fa0-8e50-ef2f7d0fdd53" name="Default Changelist" comment="" />
+    <list default="true" id="36d6bb17-6734-4fa0-8e50-ef2f7d0fdd53" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BasketItem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Item.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrderItem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +43,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -47,6 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1610871966947</updated>
       <workItem from="1610871976411" duration="12703000" />
+      <workItem from="1610898993252" duration="392000" />
     </task>
     <task id="LOCAL-00001" summary="Добавлена домашняя работа №1. &#10;в index.php в комментарии присутствует описание заданий 1-7, где задания 1-4 объединены в единый блок.">
       <created>1610898432406</created>
@@ -55,7 +64,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610898432406</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1">
+      <created>1610899152918</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610899152918</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1">
+      <created>1610899161380</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610899161380</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -71,9 +94,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавлена домашняя работа №1. &#10;в index.php в комментарии присутствует описание заданий 1-7, где задания 1-4 объединены в единый блок." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена домашняя работа №1. &#10;в index.php в комментарии присутствует описание заданий 1-7, где задания 1-4 объединены в единый блок." />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>
