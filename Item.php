@@ -23,7 +23,7 @@ class Item
     // функция выводящая сообщение
     public function about()
     {
-        echo   '<br>' . $this->itemId . ' ' . $this->brand . " " . $this->productType . ' category: ' . $this->category . ' price: ' . $this->price;
+        echo '<br>' . $this->itemId . ' ' . $this->brand . " " . $this->productType . ' category: ' . $this->category . ' price: ' . $this->price;
 
 
     }
