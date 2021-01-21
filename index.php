@@ -1,13 +1,18 @@
 <?php
 
 require "Item.php";
+require "AbstractsClasses.php";
 require "BasketItem.php";
 require "OrderItem.php";
+require "DigitalProduct.php";
+require "PieceProduct.php";
+require "WeightProduct.php";
+
 
 
 // вызов класса и передаваемые параметры
 //массив  с вызовом класса и передаваемыми данными бренда и цены
-
+/*
 $items = [
     new Item(1, "mrGrinch", "t-short", "man",  1000),
    new BasketItem(2, "Santa", "jeans","women",  1000, 2),
@@ -17,6 +22,25 @@ $items = [
 foreach ($items as $item) {
     $item->about();
 }
+*/
+
+
+//вызов метода наследников абстрактного класса
+
+$arr = [
+    new DigitalProduct('alias', 200),
+    new DigitalProduct('hokku', 400),
+    new PieceProduct('apple', 3, 10),
+    new WeightProduct('banana', 0.200, 200),
+    new WeightProduct('rice', 1, 40)
+];
+
+
+foreach ($arr as $items) {
+    $items->setPrice();
+}
+
+
 
 /*
  * Задания 1-4.

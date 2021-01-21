@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="36d6bb17-6734-4fa0-8e50-ef2f7d0fdd53" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
@@ -10,6 +11,9 @@
       <change afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+=======
+    <list default="true" id="36d6bb17-6734-4fa0-8e50-ef2f7d0fdd53" name="Default Changelist" comment="" />
+>>>>>>> hw2
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,11 +25,44 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+<<<<<<< HEAD
         <entry key="$PROJECT_DIR$" value="main" />
+=======
+        <entry key="$PROJECT_DIR$" value="hw2" />
+>>>>>>> hw2
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="hw2" />
+                    <option name="lastUsedInstant" value="1610899864" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1610899591" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+>>>>>>> hw2
   <component name="ProjectId" id="1nBmfJONzVr7ieDlvCsUWfhHf7T" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -56,6 +93,10 @@
       <updated>1610871966947</updated>
       <workItem from="1610871976411" duration="12703000" />
       <workItem from="1610898993252" duration="392000" />
+<<<<<<< HEAD
+=======
+      <workItem from="1610899412793" duration="479000" />
+>>>>>>> hw2
     </task>
     <task id="LOCAL-00001" summary="Добавлена домашняя работа №1. &#10;в index.php в комментарии присутствует описание заданий 1-7, где задания 1-4 объединены в единый блок.">
       <created>1610898432406</created>
@@ -78,7 +119,25 @@
       <option name="project" value="LOCAL" />
       <updated>1610899161380</updated>
     </task>
+<<<<<<< HEAD
     <option name="localTasksCounter" value="4" />
+=======
+    <task id="LOCAL-00004" summary="merge">
+      <created>1610899456783</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1610899456784</updated>
+    </task>
+    <task id="LOCAL-00005" summary="добавлено исключение .idea">
+      <created>1610899770121</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1610899770121</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+>>>>>>> hw2
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +158,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавлена домашняя работа №1. &#10;в index.php в комментарии присутствует описание заданий 1-7, где задания 1-4 объединены в единый блок." />
     <MESSAGE value="1" />
+<<<<<<< HEAD
     <option name="LAST_COMMIT_MESSAGE" value="1" />
+=======
+    <MESSAGE value="merge" />
+    <MESSAGE value="добавлено исключение .idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлено исключение .idea" />
+>>>>>>> hw2
   </component>
 </project>
