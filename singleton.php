@@ -6,8 +6,7 @@ trait Singleton
 
     public static function getInstance()
     {
-        if (null === self::$instance)
-        {
+        if (null === self::$instance) {
             self::$instance = new self();
         }
 
