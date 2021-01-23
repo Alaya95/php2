@@ -3,29 +3,12 @@
 /*
  * цифровой товар
  * стоимость постоянная
- *
  */
-class DigitalProduct extends AbstractsClasses
+
+class DigitalProduct extends Products
 {
-    //определение свойств класса
-    private $name;
-    private $price;
-
-    //конструктор
-
-    public function __construct($name,$price)
+    public function getFinalPrice(): float
     {
-        $this->name = $name;
-        $this->price = $price;
+        return $this->price;
     }
-
-    //метод подсчета финальной стоимости (setPrice)
-    //реализация абстрактного метода должна быть protected или public
-    public function setPrice()
-    {
-        echo  $this->name . ' ' . $this->price  . '<br>';
-    }
-
 }
-
-

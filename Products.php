@@ -8,13 +8,25 @@
  * По причине того что наследник обязан реализовать все методы, как абстрактные, то этим методом будет метод подсчета финальной стоимости. (setPrice)
  */
 
-
-abstract class AbstractsClasses
+abstract class Products implements ProductsInterface
 {
+    private $name;
+    protected $price;
 
+    public function __construct($name, $price)
+    {
+        $this->name = $name;
+        $this->price = $price;
+    }
 
-    abstract function setPrice();
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
-
-
+    abstract function getFinalPrice(): float;
 }
+
+
+
+

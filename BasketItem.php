@@ -9,7 +9,6 @@ class BasketItem extends Item
     {
         $this->count = $count;
         parent::__construct($itemId, $brand, $productType, $category, $price);
-
     }
 
     public function about()

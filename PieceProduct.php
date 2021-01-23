@@ -5,28 +5,18 @@
  * Цена зависит от количества штук
  */
 
-class PieceProduct extends AbstractsClasses
+class PieceProduct extends Products
 {
-    private $name; //имя товара
     private $count;
-    private $priceOfOneProduct; //цена одного товара
 
-    public function __construct($name, $count, $priceOfOneProduct)
+    public function __construct($name, $price, $count)
     {
-        $this->name = $name;
+        parent::__construct($name, $price);
         $this->count = $count;
-        $this->priceOfOneProduct = $priceOfOneProduct;
     }
 
-    /*
-     * Метод подсчета финальной стоимости
-     * подсчет стоимости зависит от количества штук
-     */
-
-    public function setPrice()
+    public function getFinalPrice(): float
     {
-
-        echo $this->name . ' ' . ($this->count * $this->priceOfOneProduct). '<br>';
-        // TODO: Implement setPrice() method.
+        return $this->price * $this->count;
     }
 }

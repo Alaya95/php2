@@ -13,9 +13,7 @@ class OrderItem extends BasketItem
 
     public function about()
     {
-
         parent::about();
         echo " orderID: " . $this->orderId;
     }
-
 }

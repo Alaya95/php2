@@ -1,6 +1,5 @@
 <?php
 
-
 class Item
 {
     // объявление свойств класса
@@ -19,44 +18,11 @@ class Item
         $this->category = $category;
         $this->price = $price;
     }
+
     //объявление методов класса
     // функция выводящая сообщение
     public function about()
     {
         echo '<br>' . $this->itemId . ' ' . $this->brand . " " . $this->productType . ' category: ' . $this->category . ' price: ' . $this->price;
-
-
     }
 }
-
-/*
-class Item
-{
-
-    // объявление свойств класса
-    protected $id;
-    protected $brand;
-    protected $productType;
-    protected $category;
-    protected $price;
-
-
-
-    //конструктор
-    public function __construct($id, $brand, $productType, $category, $price)
-    {
-        $this->id = $id;
-        $this->brand = $brand;
-        $this->productType = $productType;
-        $this->category = $category;
-        $this->price = $price;
-    }
-
-    //объявление методов класса
-
-    // функция выводящая сообщение
-    public function about()
-    {
-        echo 'id item ' . $this->id . $this->brand .  ' ' . $this->productType . ' price ' . $this->price . '<br>';
-    }
-}*/

@@ -3,25 +3,19 @@
  * Весовой товар
  */
 
-class WeightProduct extends AbstractsClasses
+class WeightProduct extends Products
 {
-    private $name;
     private $weight;
-    private $price;
 
-    public function __construct($name, $weight, $price)
+    public function __construct($name, $price, $weight)
     {
-        $this->name = $name;
         $this->weight = $weight;
-        $this->price = $price;
 
+        parent::__construct($name, $price);
     }
 
-    //Метод подсчета финальной стоимости
-    public function setPrice()
+    public function getFinalPrice(): float
     {
-        echo 'weigt product: ' . $this->name . ' ' . ($this->price * $this->weight) . "<br>";
-
-        // TODO: Implement setPrice() method.
+        return $this->price;
     }
 }
