@@ -9,12 +9,14 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
+<ul>
+    {% if items %}
+        {% include "goods.twig" %}
+    {% endif %}
 
-{% if items %}
-    {% include "goods.twig" %}
-{% else %}
-    {% include "goods.twig" %}
-{% endif %}
+</ul>
+<button id="showMore">more</button>
+
 
 {% if one %}
     {% include "one.twig" %}
@@ -24,38 +26,26 @@
     {% include "images.twig" %}
 {% endif %}
 
-<script>
-    //подключение ajax...
-  /*  function loadCart() {
-        $.ajax({
-            type: "post",
-            url: "index.php",
-            data: "",
-            dataType: "html",
-            cache: false,
-            success: function (data) {
-                if (!data) {
-                    $.html("Корзина пуста").show();
-                } else {
-                    $.html(data);
-                }
-            }
-        });
-    }
-*/
 
-    $('#showMore').on('click', function (event) {
+
+
+
+<script>
+
+    //подключение ajax...
+    $('button').on('click', function (event) {
+        console.log($(this).val())
         $.ajax({
             url: '../hw4/index.php',    /* Куда пойдет запрос */
             method: 'get',              /* Метод передачи (post или get) */
             dataType: 'html',           /* Тип данных в ответе (xml, json, script, html). */
-            data: {text: 'showMore'},   /* Параметры передаваемые в запросе. */
-            success: function(data){    /* функция которая будет выполнена после успешного запроса.  */
-                console.log(data);           /* В переменной data содержится ответ от index.php. */
+            data: {text: 'showMore'},           /* Параметры передаваемые в запросе. */
+            success: function (data) {  /* функция которая будет выполнена после успешного запроса.  */
+                console.log(data);      /* В переменной data содержится ответ от index.php. */
             }
         });
     });
-</script>
 
+</script>
 </body>
 </html>
