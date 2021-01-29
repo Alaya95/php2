@@ -17,11 +17,10 @@ if (
 }
 
 
-$loader = new \Twig\Loader\FilesystemLoader('../templates');
+$loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
 
 echo $twig->render('index.twig', [
     "images" => $images,
     "one" => $one,
-
 ]);
