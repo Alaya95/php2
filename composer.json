@@ -2,9 +2,6 @@
   "require": {
     "twig/twig": "^3.0"
   },
-  "scripts": {
-    "dev": "php -S localhost -t public"
-  },
   "config": {
     "process-timeout": 0
   },

@@ -3,31 +3,46 @@
 class DBConnect
 {
     public const TABLE_GOODS = 'product';
+
     private static $config = [
-        'host' => 'localhost',
+        'dsn' => 'mysql:host=localhost;dbname=goods',
         'user' => 'root',
-        'pwd' => 'root',
-        'db' => 'goods',
-        'port' => '3307'
+        'pwd' => '743752As',
     ];
 
-    static int $count = 0;
-
+    static $count = 0;
     private static $instance;
     private $link;
 
-    public function getAllData($tableName)
+    public function getCount($tableName)
     {
         return $this->link
-            ->query('SELECT * FROM ' . $tableName . ' LIMIT 0,5')
-            ->fetch_all(MYSQLI_ASSOC);
+            ->query("SELECT COUNT(*) FROM {$tableName}")
+            ->fetchColumn();//16:58
     }
 
-    public function getShowMore($tableName)
+    public function getAllData($tableName)
     {
-        return $this->link
-            ->query('SELECT * FROM ' . $tableName . ' LIMIT 5,5')
-            ->fetch_all(MYSQLI_ASSOC);
+        try {
+            return $this->link
+                ->query("SELECT * FROM {$tableName} LIMIT 0,5")
+                ->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            return false;
+        }
+    }
+
+    public function getShowMore($tableName, int $start, int $limit)
+    {
+
+        try {
+            return $this->link
+                ->query("SELECT * FROM {$tableName} LIMIT {$start},{$limit}")
+                ->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            return false;
+        }
+
     }
 
     public static function getInstance()
@@ -39,15 +54,12 @@ class DBConnect
         return self::$instance;
     }
 
-
     private function __construct()
     {
-        $this->link = mysqli_connect(
-            self::$config['host'],
+        $this->link = new PDO(
+            self::$config['dsn'],
             self::$config['user'],
-            self::$config['pwd'],
-            self::$config['db'],
-            self::$config['port'],
+            self::$config['pwd']
         );
 
         if (false === $this->link) {

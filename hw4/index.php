@@ -1,24 +1,33 @@
 <?php
+
 require "DBConnect.php";
 require "../vendor/autoload.php";
-
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
 
-$items = $showMore = null;
+$limit = 5;
 
-if(isset($_GET['showMore'])){
-    print_r($_GET);
-    $showMore = DBConnect::getInstance()->getShowMore(DBConnect::TABLE_GOODS);
+
+if (isset($_GET['from'])) {
+    $count = DBConnect::getInstance()->getCount(DBConnect::TABLE_GOODS);
+    $loaded = $_GET['from'] + $limit;
+
+    $all = $loaded >= $count;
+
+    $goods = DBConnect::getInstance()->getShowMore(DBConnect::TABLE_GOODS, $_GET['from'], $limit);
     echo $twig->render('goods.twig', [
-        "items" => $items,
-        "showMore" => $showMore,
+        "goods" => $goods,
+        'all' => $all,
     ]);
-} else {
-    $items = DBConnect::getInstance()->getAllData(DBConnect::TABLE_GOODS);
-      echo $twig->render('index.twig', [
-          "items" => $items,
-      ]);
+    exit;
 }
+
+$goods = DBConnect::getInstance()->getAllData(DBConnect::TABLE_GOODS);
+
+echo $twig->render('index.twig', [
+    "goods" => $goods,
+    "limit" => $limit,
+]);
+
 
