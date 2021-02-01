@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Goods</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+    <div class="goods">
+    </div>
+    <button id="showMore">load more</button>
+
+<script>
+    //подключение ajax...
+
+    let from = 0;
+
+    function loadMore() {
+        $.ajax({
+            url: '?from=' + from,    /* Куда пойдет запрос */
+            dataType: 'html',           /* Тип данных в ответе (xml, json, script, html). */
+            success: function (data) {  /* функция которая будет выполнена после успешного запроса.  */
+                $('.goods').append(data);
+                from += {{ limit }};      /* В переменной data содержится ответ от index.php. */
+            }
+        });
+    }
+
+    loadMore();
+
+    $('#showMore').click(function() {
+        loadMore();
+    })
+
+</script>
+</body>
+</html>
