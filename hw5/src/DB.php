@@ -4,7 +4,6 @@ namespace MyApp;
 
 class DB
 {
-
     static $count = 0;
     private $link;
 
@@ -45,7 +44,6 @@ class DB
             return false;
         }
     }
-
 
     public function __construct($config)
     {

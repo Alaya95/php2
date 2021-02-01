@@ -19,6 +19,7 @@ class Controller
         if( null === $url){
             $url = $_SERVER['REQUEST_URI'];
         }
+
         header('Location: ' . $url);
         exit;
     }
