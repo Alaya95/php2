@@ -12,6 +12,21 @@ class Orders extends Model
     const TABLE_ORDERS = 'orders';
     const TABLE_ORDERS_GOODS = 'orders_goods';
 
+    public static function get($userId)
+    {
+        return self::link()
+            ->query('SELECT 
+                    orders_goods.id, orders_goods.order_id,
+                    orders.`date` AS order_date,
+                    goods.title as title,
+                    orders_goods.`price`, `count`
+                FROM ' . self::TABLE_ORDERS_GOODS . '
+                LEFT JOIN orders ON order_id = orders.id
+                LEFT JOIN goods ON good_id = goods.id
+                where orders.user_id=' . $userId
+                . ' ORDER BY order_date desc ')
+            ->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
     public static function add($userId, $goodsCounts): int
     {
@@ -36,5 +51,21 @@ class Orders extends Model
 
         return $orderId;
     }
+
+    public static function getOrders()
+    {
+        return self::link()
+            ->query('SELECT 
+                    orders_goods.id, orders_goods.order_id,
+                    orders.`date` AS order_date,
+                    goods.title as title,
+                    orders_goods.`price`, `count`
+                FROM ' . self::TABLE_ORDERS_GOODS . '
+                LEFT JOIN orders ON order_id = orders.id
+                LEFT JOIN goods ON good_id = goods.id
+                ORDER BY order_date desc ')
+            ->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 
 }

@@ -14,10 +14,16 @@ class Auth
     public static function login($login)
     {
         $_SESSION['user'] = Users::get($login);
+
     }
 
     public static function logout()
     {
         $_SESSION['user'] = null;
+    }
+
+    public static function usersRoles($userId)
+    {
+        $_SESSION['roles'] = Users::getUsersRole($userId);
     }
 }

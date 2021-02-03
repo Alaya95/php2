@@ -4,14 +4,7 @@
 
 {% block content %}
     <b>{{ _user.login }}</b>
-    <br/><br/>
-    Recent pages:<br/>
-    {% for item in history %}
-        <li><a target="_blank" href="{{ item.url }}">{{ item.url }}</a></li>
-    {% endfor %}
     Orders:
-
-    {% if errorOrder %}
         <table border="1" cellpadding="5">
             <tr>
                 <th>Order id</th>
@@ -19,7 +12,6 @@
                 <th>Price</th>
                 <th>Count</th>
                 <th>order date</th>
-
             </tr>
             {% for order in orders %}
                 <tr>
@@ -31,10 +23,4 @@
                 </tr>
             {% endfor %}
         </table>
-        {% else %}
-        no order
-
-    {% endif %}
-
-
 {% endblock %}

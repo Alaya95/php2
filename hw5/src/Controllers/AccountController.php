@@ -32,6 +32,40 @@ class AccountController extends Controller
         ]);
     }
 
+    public function actionOrders()
+    {
+        /*
+         * Здесь должен выводиться список всех заказов
+         * для админа или root
+         */
+        if ($_SESSION['login']) {
+            $this->redirect('login');
+        }
+        /*
+         * Получаем массив ролей пользователя
+         */
+        $userRoles = $_SESSION['roles'];
+
+        foreach ($userRoles as $key) {
+            $userRole[] = $key['role'];
+        }
+
+        /*
+         * Не получилось ничего придумать кроме как это
+         * Если пользователь не является админом или рутом
+         * его перенаправит обратно в аккаунт
+         */
+        if($userRole[0] == 1 || $userRole[1] == 2) {
+            $orders = Orders::getOrders();
+
+            $this->render('account/orders.twig', [
+                'orders' => $orders,
+            ]);
+        } else {
+            $this->redirect('/account');
+        }
+    }
+
     public function actionBasket()
     {
         $basket = Basket::get();
@@ -52,11 +86,6 @@ class AccountController extends Controller
         ]);
     }
 
-    public function actionOrders()
-    {
-    }
-
-
     public function actionLogin()
     {
         $error = false;
@@ -64,12 +93,12 @@ class AccountController extends Controller
         if (isset($_POST['login'])) {
             if (Users::check($_POST['login'], $_POST['pwd'])) {
                 Auth::login($_POST['login']);
+                Auth::usersRoles($_SESSION['user']['id']);
                 $this->redirect('/account');
             } else {
                 $error = true;
             }
         }
-
         $this->render('account/login.twig', [
             'error' => $error,
         ]);
@@ -84,14 +113,30 @@ class AccountController extends Controller
 
     public function actionIndex()
     {
+
         if (!($user = Auth::getUser())) {
             $this->redirect('/login');
         }
 
         $history = History::getLast($user['id']);
 
+        /*
+         * Тут универсальный запрос получился...
+         * выводит все заказанные товары, которые соответствуют
+         * orders.user_id = id пользователя которые зашел в систему
+         */
+
+        $error = false;
+
+
+        if ($orders = Orders::get($user['id'])) {
+            $error = true;
+        }
+
         $this->render('account/index.twig', [
             'history' => $history,
+            'orders' => $orders,
+            'errorOrder' => $error,
         ]);
     }
 

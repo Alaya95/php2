@@ -11,10 +11,10 @@ class Users extends Model
     */
 
     const TABLE_USERS = 'users';
+    const TABLE_USERS_ROLES = 'users_roles';
 /*
     //добавление пользователя в базу данных, при регистрации по умолчанию будет присваиваться роль user
-    // Куда ее впихнуть несчастную????
-    // "Думай голова! Садись два!"
+
     public static function add($username, $password)
     {
         if (empty($login) || empty($password)) {
@@ -46,5 +46,11 @@ class Users extends Model
         }
 
         return password_verify($password, $user['pass']);
+    }
+
+    public static function getUsersRole($userId) {
+        return self::link()
+            ->query("SELECT role FROM " . self::TABLE_USERS_ROLES . " WHERE user_id = " . (int)$userId)
+            ->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
