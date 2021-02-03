@@ -3,6 +3,7 @@
 namespace MyApp;
 
 use MyApp\Controllers\IndexController;
+use MyApp\Models\History;
 
 class App
 {
@@ -25,19 +26,17 @@ class App
 
     public function run()
     {
-        $this->db = new DB($this->config['db']);
+        session_start();
 
         $path = $_SERVER['REQUEST_URI'];
-        [$url] = explode('?', $path);
-        $url = trim($url, '/');
-        [$controllerName, $actionName, $param] = explode('/', $url);
 
-        if (empty($controllerName)) {
-            $controllerName = 'index';
-        }
+        $router = new Router($this->config['routing']);
+        [$controllerName, $actionName, $param] = $router->parse($path);
 
-        if (empty($actionName)) {
-            $actionName = 'index';
+        $this->db = new DB($this->config['db']);
+
+        if ($user = Auth::getUser()) {
+            History::add($user['id'], $path);
         }
 
         $controllerClass = "MyApp\Controllers\\" . ucfirst($controllerName) . "Controller";
@@ -52,14 +51,6 @@ class App
         }
 
         (new IndexController())->actionErrror();
-
-
-        /* print_r([
-             'controller' => $controllerName,
-             'action' => $actionName,
-             'param' => $param
-         ]);*/
-
     }
 
 
@@ -76,6 +67,5 @@ class App
 
     private function __construct()
     {
-
     }
 }

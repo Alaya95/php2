@@ -1,0 +1,11 @@
+{% extends 'layout.twig' %}
+
+{% block title %}Order{% endblock %}
+
+{% block content %}
+    Thank you, order number {{ orderId }}
+    Orders:
+    {% for order in orders %}
+        <li>{{order.id }} - {{ order.price }}</li>
+    {% endfor %}
+{% endblock %}

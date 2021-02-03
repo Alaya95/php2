@@ -2,52 +2,107 @@
 
 namespace MyApp\Controllers;
 
+use MyApp\Auth;
+use MyApp\Basket;
+use MyApp\Models\Goods;
+use MyApp\Models\History;
+use MyApp\Models\Orders;
 use MyApp\Models\Users;
 
 class AccountController extends Controller
 {
-    //основные данные
+    public function actionOrder()
+    {
+        $basket = Basket::get();
+
+        if (!$basket['count']) {
+            $this->redirect('/catalog');
+        }
+
+        if (!($user = Auth::getUser())) {
+            $this->redirect('login');
+        }
+
+        $orderId = Orders::add($user['id'], $basket['goods']);
+
+        Basket::clear();
+
+        $this->render('account/order.twig', [
+            'orderId' => $orderId,
+        ]);
+    }
+
+    public function actionBasket()
+    {
+        $basket = Basket::get();
+
+        $goods = [];
+        $sum = 0;
+
+        foreach ($basket['goods'] as $id => $count) {
+            $good = Goods::getById($id);
+            $good['count'] = $count;
+            $sum += $good['sum'] = $count * $good['price'];
+            $goods[] = $good;
+        }
+
+        $this->render('account/basket.twig', [
+            'sum' => $sum,
+            'goods' => $goods,
+        ]);
+    }
+
+    public function actionOrders()
+    {
+    }
+
+
+    public function actionLogin()
+    {
+        $error = false;
+
+        if (isset($_POST['login'])) {
+            if (Users::check($_POST['login'], $_POST['pwd'])) {
+                Auth::login($_POST['login']);
+                $this->redirect('/account');
+            } else {
+                $error = true;
+            }
+        }
+
+        $this->render('account/login.twig', [
+            'error' => $error,
+        ]);
+    }
+
+    public function actionLogout()
+    {
+        Auth::logout();
+        Basket::clear();
+        $this->redirect('/');
+    }
 
     public function actionIndex()
     {
-        //если входа не выполнено, то вызываем страницу с входом в личный кабинет и регистрацией..
-        if (empty($_SESSION['username'])) {
-            $this->render("signIn.twig");
-        } else {
-            $this->render("account.twig", [
-                'users' => $_SESSION['username'],
-            ]);
+        if (!($user = Auth::getUser())) {
+            $this->redirect('/login');
         }
 
-        // Вход в лк. Если вход выполнен успешно, то загружаем страницу с аккаунтом
-        //$pass = Users::check($_GET['username'], $_GET['password']);
-        if ($users = Users::check($_GET['username'], $_GET['password'])) {
-            $_SESSION['username'] = $_GET['username'];
-        }
+        $history = History::getLast($user['id']);
 
-        // регистрация
-        if (isset($_POST['username'])) {
-            Users::add($_POST['username'], $_POST['password']);
-            $this->redirect();
-        }
+        $this->render('account/index.twig', [
+            'history' => $history,
+        ]);
     }
 
-    //настройки пользователя
+
     public function actionSettings()
     {
+        echo 'Users settings';
     }
 
-    public static function logout()
-    {
-        //????
-        $_SESSION['user'] = null;
-    }
-
-    //смена пароля
     public function actionPassword()
     {
-        echo 'users password';
-        $this->render("changePassword.twig");
+        echo 'Users change pwd page';
     }
-
 }

@@ -34,6 +34,17 @@ class DB
         }
     }
 
+    public function getById($tableName, $id)
+    {
+        try {
+            return $this->link
+                ->query("SELECT * FROM {$tableName} WHERE id = " . (int)$id)
+                ->fetch(\PDO::FETCH_ASSOC);
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
+
     public function getShowMore($tableName, int $start, int $limit)
     {
         try {
