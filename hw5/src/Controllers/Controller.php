@@ -3,6 +3,8 @@
 namespace MyApp\Controllers;
 
 use MyApp\App;
+use MyApp\Auth;
+use MyApp\Basket;
 
 class Controller
 {
@@ -26,6 +28,9 @@ class Controller
 
     protected function render($templates, $data = [])
     {
+        $data['_user'] = Auth::getUser();
+        $data['_basket'] = Basket::get();
+
         echo $this->twig->render($templates, $data);
     }
 }

@@ -1,41 +1,53 @@
 <?php
 
-
 namespace MyApp\Models;
-
-use MyApp\App;
 
 class Users extends Model
 {
-    const TABLE_USERS = 'users';
+    const ROLE_ADMIN = 1;
+    const ROLE_CONTENT = 2;
+    const ROLE_USER = 3;
 
-    public static function add($username, $password)
+    const TABLE = 'users';
+    const TABLE_ROLES = 'users_roles';
+
+    public static function get($login)
     {
-        if (empty($username) || empty($password)) {
-            return;
-        }
-        $passHash = password_hash($password, PASSWORD_DEFAULT);
-
-        $stmt = self::link()->prepare("INSERT INTO " . self::TABLE_USERS . " SET username = :username, passwords = :passwords ");
-        $stmt->bindParam(':username', $username, \PDO::PARAM_STR);
-        $stmt->bindParam(':passwords', $passHash, \PDO::PARAM_STR);
+        $stmt = self::link()->prepare("SELECT * FROM " . self::TABLE . " WHERE login=:login LIMIT 1");
+        $stmt->bindParam(':login', $login, \PDO::PARAM_STR);
         $stmt->execute();
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return false;
+        }
+
+        $user['roles'] = self::getRoles($user['id']);
+
+        return $user;
     }
 
-    public static function getUsername($username)
+    public static function check($login, $password)
     {
+        $user = self::get($login);
+        if (!$user) {
+            return false;
+        }
 
-        $stmt = self::link()->prepare("SELECT * FROM " . self::TABLE_USERS . " WHERE username = :username");
-        $stmt->bindParam(':username', $username, \PDO::PARAM_STR);
-        $stmt->execute();
-
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return password_verify($password, $user['pass']);
     }
 
-    public static function check($username, $password)
-    {
-        if ($username = self::getUsername($username)) {
-            return password_verify($password, $username['passwords']);
+    public static function getRoles($userId) {
+        $rows = self::link()
+            ->query("SELECT role FROM " . self::TABLE_ROLES . " WHERE user_id = " . (int)$userId)
+            ->fetchAll(\PDO::FETCH_ASSOC);
+
+        $roles = [];
+
+        foreach ($rows as $row) {
+            $roles[] = (int)$row['role'];
         }
+
+        return $roles;
     }
 }
