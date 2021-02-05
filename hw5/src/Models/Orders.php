@@ -12,20 +12,74 @@ class Orders extends Model
     const TABLE_ORDERS = 'orders';
     const TABLE_ORDERS_GOODS = 'orders_goods';
 
-    public static function get($userId)
+    private static $statuses = [
+        self::STATUS_NEW => 'New',
+        self::STATUS_PROGRESS => 'In progress',
+        self::STATUS_REJECTED => 'Rejected',
+        self::STATUS_DONE => 'Finished',
+    ];
+
+    public static function getStatuses()
     {
-        return self::link()
-            ->query('SELECT 
-                    orders_goods.id, orders_goods.order_id,
-                    orders.`date` AS order_date,
-                    goods.title as title,
-                    orders_goods.`price`, `count`
-                FROM ' . self::TABLE_ORDERS_GOODS . '
-                LEFT JOIN orders ON order_id = orders.id
-                LEFT JOIN goods ON good_id = goods.id
-                where orders.user_id=' . $userId
-                . ' ORDER BY order_date desc ')
-            ->fetchAll(\PDO::FETCH_ASSOC);
+        return self::$statuses;
+    }
+
+    public static function setStatus($id, $status)
+    {
+        if (!isset(self::$statuses[$status])) {
+            return;
+        }
+
+        self::link()->exec('UPDATE ' . self::TABLE_ORDERS . ' SET status=' . (int)$status . ' WHERE id=' . (int)$id);
+    }
+
+    public static function getAllRows()
+    {
+        return self::link()->query('
+            SELECT
+            orders.id, orders.`date`,orders.`status`,
+            orders_goods.good_id,
+            orders_goods.price,orders_goods.`count`,
+            goods.title, goods.category_id,
+            users.login
+            FROM orders
+            JOIN orders_goods ON orders.id=orders_goods.order_id
+            JOIN users ON orders.user_id=users.id
+            JOIN goods ON goods.id=orders_goods.good_id
+            ORDER BY orders.id DESC
+        ')->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public static function getAll()
+    {
+        $rows = static::getAllRows();
+
+        $orders = [];
+        foreach ($rows as $row) {
+            $id = $row['id'];
+
+            if (!isset($orders[$id])) {
+                $orders[$id] = [
+                    'id' => $id,
+                    'date' => $row['date'],
+                    'status' => $row['status'],
+                    'login' => $row['login'],
+                    'sum' => 0,
+                    'goods' => [],
+                ];
+            }
+
+            $orders[$id]['goods'][] = [
+                'id' => $row['good_id'],
+                'price' => $row['price'],
+                'count' => $row['count'],
+                'title' => $row['title'],
+                'categoryId' => $row['category_id'],
+                'sum' => $row['count'] * $row['price'],
+            ];
+            $orders[$id]['sum'] += $row['count'] * $row['price'];
+        }
+
+        return $orders;
     }
 
     public static function add($userId, $goodsCounts): int
@@ -51,21 +105,4 @@ class Orders extends Model
 
         return $orderId;
     }
-
-    public static function getOrders()
-    {
-        return self::link()
-            ->query('SELECT 
-                    orders_goods.id, orders_goods.order_id,
-                    orders.`date` AS order_date,
-                    goods.title as title,
-                    orders_goods.`price`, `count`
-                FROM ' . self::TABLE_ORDERS_GOODS . '
-                LEFT JOIN orders ON order_id = orders.id
-                LEFT JOIN goods ON good_id = goods.id
-                ORDER BY order_date desc ')
-            ->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
-
 }

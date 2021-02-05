@@ -24,8 +24,14 @@ class App
         return $this->db;
     }
 
+    public function init()
+    {
+        $this->db = new DB($this->config['db']);
+    }
+
     public function run()
     {
+        $this->init();
         session_start();
 
         $path = $_SERVER['REQUEST_URI'];

@@ -9,32 +9,4 @@
     {% for item in history %}
         <li><a target="_blank" href="{{ item.url }}">{{ item.url }}</a></li>
     {% endfor %}
-    Orders:
-
-    {% if errorOrder %}
-        <table border="1" cellpadding="5">
-            <tr>
-                <th>Order id</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Count</th>
-                <th>order date</th>
-
-            </tr>
-            {% for order in orders %}
-                <tr>
-                    <td>{{ order.order_id }}</td>
-                    <td>{{ order.title }}</td>
-                    <td>{{ order.price }}</td>
-                    <td>{{ order.count }}</td>
-                    <td>{{ order.order_date }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        no order
-
-    {% endif %}
-
-
 {% endblock %}

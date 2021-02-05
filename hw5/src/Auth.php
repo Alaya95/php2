@@ -22,8 +22,14 @@ class Auth
         $_SESSION['user'] = null;
     }
 
-    public static function usersRoles($userId)
+    public static function hasRole($role)
     {
-        $_SESSION['roles'] = Users::getUsersRole($userId);
+        $user = self::getUser();
+
+        if (!$user) {
+            return false;
+        }
+
+        return in_array((int)$role, $user['roles'], true);
     }
 }
