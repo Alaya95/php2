@@ -11,7 +11,7 @@ class Catalog extends Model
         return self::db()->getById(self::TABLE, $id);
     }
 
-    public static  function getCategories()
+    public static function getCategories()
     {
         return self::db()->getAllData(self::TABLE);
     }

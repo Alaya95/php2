@@ -37,7 +37,7 @@ class Router
         return false;
     }
 
-    private static function filter(string $url): string
+    public static function filter(string $url): string
     {
         // '//catalog///234/245///' => ['','','catalog','','','234','245','','','']
         $parts = explode('/', $url);

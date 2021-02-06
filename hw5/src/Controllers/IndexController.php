@@ -10,7 +10,7 @@ class IndexController extends Controller
         $this->render("index.twig");
     }
 
-    public function actionErrror()
+    public function actionError()
     {
         $this->render("error.twig");
     }
