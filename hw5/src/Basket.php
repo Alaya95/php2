@@ -4,6 +4,7 @@ namespace MyApp;
 
 class Basket
 {
+
     public static function get()
     {
         self::init();
@@ -26,7 +27,7 @@ class Basket
 
     public static function init($force = false)
     {
-        if ($force || empty($_SESSION['basket']) ) {
+        if ($force || empty($_SESSION['basket'])) {
             $_SESSION['basket'] = [
                 'count' => 0,
                 'goods' => [],
