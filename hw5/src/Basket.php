@@ -4,7 +4,6 @@ namespace MyApp;
 
 class Basket
 {
-
     public static function get()
     {
         self::init();
@@ -17,6 +16,9 @@ class Basket
         self::init();
 
         $_SESSION['basket']['count']++;
+        if (!isset($_SESSION['basket']['goods'][$id])) {
+            $_SESSION['basket']['goods'][$id] = 0;
+        }
         $_SESSION['basket']['goods'][$id]++;
     }
 

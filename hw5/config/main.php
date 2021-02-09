@@ -13,6 +13,10 @@ return [
         'pwd' => '743752As',
     ],
     'templates' => __DIR__ . '/../templates',
+    'goodsImages' => [
+        'dir' => __DIR__ . '/../public/src/images/goods',
+        'url' => '/src/images/goods',
+    ],
     'routing' => [
         'login' => 'account/login',
         'logout' => 'account/logout',
