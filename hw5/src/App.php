@@ -11,7 +11,7 @@ class App
     private $config;
     private $db;
 
-    public static function getInstanse()
+    public static function getInstance()
     {
         if (null === self::$instanse) {
             self::$instanse = new self();
@@ -39,8 +39,6 @@ class App
         $router = new Router($this->config['routing']);
         [$controllerName, $actionName, $param] = $router->parse($path);
 
-        $this->db = new DB($this->config['db']);
-
         if ($user = Auth::getUser()) {
             History::add($user['id'], $path);
         }
@@ -56,7 +54,7 @@ class App
             }
         }
 
-        (new IndexController())->actionErrror();
+        (new IndexController())->actionError();
     }
 
 

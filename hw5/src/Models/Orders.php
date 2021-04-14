@@ -49,6 +49,7 @@ class Orders extends Model
             ORDER BY orders.id DESC
         ')->fetchAll(\PDO::FETCH_ASSOC);
     }
+
     public static function getAll()
     {
         $rows = static::getAllRows();

@@ -2,7 +2,9 @@
 
 namespace MyApp\Controllers;
 
+use MyApp\App;
 use MyApp\Basket;
+use MyApp\GoodsImages;
 use MyApp\Models\Catalog;
 use MyApp\Models\Goods;
 
@@ -44,9 +46,16 @@ class CatalogController extends IndexController
         if (!($good = Goods::getById($goodId))) {
             $this->redirect('/catalog');
         }
+
+        $gi = new GoodsImages(App::getInstance()->getConfig()['goodsImages']);
+
         $this->render('catalog/good.twig', [
             'category' => $category,
             'good' => $good,
+            'images' => $gi->getImagesUrls($goodId)
         ]);
+        print_r($gi->getImagesUrls($goodId));
+
+
     }
 }

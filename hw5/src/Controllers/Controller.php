@@ -12,7 +12,7 @@ class Controller
 
     public function __construct()
     {
-        $loader = new \Twig\Loader\FilesystemLoader(App::getInstanse()->getConfig()['templates']);
+        $loader = new \Twig\Loader\FilesystemLoader(App::getInstance()->getConfig()['templates']);
         $this->twig = new \Twig\Environment($loader);
     }
 

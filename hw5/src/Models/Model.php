@@ -9,11 +9,11 @@ abstract class Model
 {
     protected static function db(): DB
     {
-        return App::getInstanse()->getDB();
+        return App::getInstance()->getDB();
     }
 
     protected static function link(): \PDO
     {
-        return App::getInstanse()->getDB()->getLink();
+        return App::getInstance()->getDB()->getLink();
     }
 }

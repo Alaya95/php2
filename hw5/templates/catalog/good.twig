@@ -6,6 +6,11 @@
     <b><a href="/catalog">Каталог</a> / <a href="/catalog/{{ category.id }}">{{ category.title }}</a> / {{ good.title }}
     </b><br/>
 
+
+    {% for img in images %}
+        <a href="{{ img }}"><img style="width: 200px" src="{{ img }}" alt="productPhoto"></a>
+    {% endfor %}
+
     <div>${{ good.price }}</div>
     <div>{{ good.info }}</div>
     <br/>
